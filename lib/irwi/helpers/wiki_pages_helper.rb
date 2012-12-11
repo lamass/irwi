@@ -64,7 +64,7 @@ module Irwi::Helpers::WikiPagesHelper
                (\w+)?/xu do |m|
       text = "#$2#$3"
       link, anchor = if $1 then $1.split('#', 2) else $2 end
-      "<a href=\"#{wiki_link link}#{ '#' + anchor if anchor}\">#{text}</a>"
+      "<a href=\"#{wiki_link link}#{ '#' + anchor if anchor}\"#{ class=\"not-existing-page\" if wiki_page_exists?(link)}>#{text}</a>"
     end.html_safe
   end
 
@@ -78,6 +78,10 @@ module Irwi::Helpers::WikiPagesHelper
     else
       url_for( :controller => Irwi.config.controller_name, :action => :show, :path => CGI::escape(title) )
     end
+  end
+  
+  def wiki_page_exists?(title)
+	Irwi.config.page_class.find_by_title( title ) ? true : false
   end
 
   ##

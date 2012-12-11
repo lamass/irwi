@@ -17,7 +17,6 @@ module Irwi::Support::RouteMapper
     get( "#{root}/new/(*path)", opts.merge({ :action => 'new', :as => 'new_wiki_page' }) ) # Wiki new route
     get( "#{root}/edit/(*path)", opts.merge({ :action => 'edit', :as => 'edit_wiki_page' }) ) # Wiki edit route
     get( "#{root}/history/(*path)", opts.merge({ :action => 'history', :as => 'history_wiki_page' }) ) # Wiki history route
-	get( "#{root}/index/:term", opts.merge({ :action => 'index', :as => 'wiki_search' }) ) # Wiki pages search
 	
     # Attachments
     post("#{root}/attach/(*path)", opts.merge({:action => 'add_attachment' }))
