@@ -64,7 +64,8 @@ module Irwi::Helpers::WikiPagesHelper
                (\w+)?/xu do |m|
       text = "#$2#$3"
       link, anchor = if $1 then $1.split('#', 2) else $2 end
-      "<a href=\"#{wiki_link link}#{ '#' + anchor if anchor}\" class=\"#{wiki_page_exists?(link) ? 'existing-page' : 'not-existing-page'}\">#{text}</a>"
+	  exists = wiki_page_exists?(link)
+      "<a href=\"#{wiki_link link}#{ '#' + anchor if anchor}\" title=\"#{link}#{' (no such page)' unless exists}\" class=\"#{exists ? 'existing-page' : 'not-existing-page'}\">#{text}</a>"
     end.html_safe
   end
 
